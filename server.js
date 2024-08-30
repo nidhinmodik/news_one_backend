@@ -10,7 +10,8 @@ dotenv.config();
 // Set up CORS
 if (process.env.MODE === 'production') {
     app.use(cors({
-        origin: ["http://localhost:5173", "http://localhost:3000"] // Specify allowed origins for production
+        origin: ["https://news-one-by-one-backend.onrender.com"], // Specify allowed origins for production
+        credentials: true,
     }));
 } else {
     app.use(cors({
