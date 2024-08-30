@@ -8,20 +8,20 @@ const db_connect = require('./utils/db');
 dotenv.config();
 
 // Set up CORS
-if (process.env.mode === 'production') {
-    app.use(cors());
+if (process.env.MODE === 'production') {
+    app.use(cors({
+        origin: ["http://localhost:5173", "http://localhost:3000"] // Specify allowed origins for production
+    }));
 } else {
     app.use(cors({
-        origin: ["http://localhost:5173", "http://localhost:3000"], // Allow both origins
-        credentials: true, // If you need to support credentials (e.g., cookies)
+        origin: ["http://localhost:5173", "http://localhost:3000"], // Allow both origins in development
+        credentials: true, // Support credentials (e.g., cookies)
     }));
 }
-
 
 // Set up body parsing middleware
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
-
 
 // Define routes
 app.use('/', require('./routes/authRoutes'));
@@ -30,6 +30,6 @@ app.use('/', require('./routes/adRoutes'));
 app.get('/', (req, res) => res.send('Hello World!'));
 
 // Start the server
-const port = process.env.port || 5000; // Use a default port if not defined in .env
+const port = process.env.PORT || 5000; // Use PORT from .env or default to 5000
 db_connect();
 app.listen(port, () => console.log(`Server is running on port ${port}!`));
