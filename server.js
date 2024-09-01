@@ -10,10 +10,11 @@ dotenv.config();
 // Set up CORS
 if (process.env.MODE === 'production') {
     app.use(cors({
-        origin: ["https://news-one-by-one-backend.onrender.com"], // Specify allowed origins for production
+        origin: ["https://news-01-09-24-fmeu-8y7uke3i1-nidhinmodiks-projects.vercel.app"], // Specify allowed origins for production
         credentials: true,
     }));
-} else {
+} 
+else {
     app.use(cors({
         origin: ["http://localhost:5173", "http://localhost:3000"], // Allow both origins in development
         credentials: true, // Support credentials (e.g., cookies)
